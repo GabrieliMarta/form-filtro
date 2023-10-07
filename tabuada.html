@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ONINPUT</title>
+    <script>
+        function Nomes() {
+            const nomeInput = document.getElementById('nomeInput');
+            const listaNomes = document.getElementById('listaNomes');
+            const termo = nomeInput.value.toLowerCase();
+
+            const nomes = listaNomes.getElementsByTagName('li');
+            for (let index = 0; index < nomes.length; index++) {
+                const nome = nomes[index].textContent.toLowerCase();
+                if (nome.includes(termo)) {
+                    nomes[index].innerHTML = nome.replace(termo, `<strong>${termo}</strong>`);
+                } else {
+                    nomes[index].innerHTML = nome;
+                }
+            }
+        }
+    
+        function Tabuada() {
+            const numeroInput = document.getElementById('numeroInput');
+            const tabuadaDiv = document.getElementById('tabuada');
+            const numero = parseInt(numeroInput.value);
+
+            if (!isNaN(numero)) {
+                tabuadaDiv.innerHTML = '';
+
+                for (let contador = 1; contador <= 10; contador++) {
+                    const resultado = numero * contador;
+                    const paragrafo = document.createElement('p');
+                    paragrafo.textContent = `${numero} x ${contador} = ${resultado}`;
+                    tabuadaDiv.appendChild(paragrafo);
+                }
+            } else {
+                tabuadaDiv.innerHTML = 'Digite um número válido.';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>CALCULAR TABUADA</h1>
+    <input type="number" id="numeroInput" oninput="Tabuada()">
+    <div id="tabuada"></div>
+
+    <br>
+    <h1>Encontrar o Nome</h1>
+    <input type="text" id="nomeInput" oninput="Nomes()">
+    <ul id="listaNomes">
+        <li>Jose</li>
+        <li>Samuel</li>
+        <li>Henrique</li>
+        <li>flávia</li>
+        <li>Gustavo</li>
+        <li>Murilo</li>
+    </ul>
+</body>
+
+</html>
